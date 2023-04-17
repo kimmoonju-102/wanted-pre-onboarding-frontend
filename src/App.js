@@ -1,11 +1,14 @@
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {Signup} from '@/pages/Signup/Signup'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        
-      </header>
+      <Router>
+        <Routes>
+          <Route path="/" element={Signup()}/>    
+        </Routes>
+      </Router>
     </div>
   );
 }
