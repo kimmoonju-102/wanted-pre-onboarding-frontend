@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { CustomButton } from "@/components/Button/CustomButton";
 import { InputWithLabel } from "@/components/InputWithLabel/InputWithLabel";
 import styled from "styled-components/macro";
@@ -13,9 +14,23 @@ export function Signin() {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("https://www.pre-onboarding-selection-task.shop/auth/signin", {
+        email: values.email,
+        password: values.password,
+      });
+      localStorage.setItem("token", response.data.access_token);
+      console.log("Login successful!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <StyledSignin>
-      <form className="signin">
+      <form onSubmit={handleSubmit}  className="signin">
         <h1>Singin</h1>
         <InputWithLabel 
           id="email"
