@@ -9,6 +9,10 @@ export function Signin() {
     password: "",
   });
 
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
   return (
     <StyledSignin>
       <form className="signin">
@@ -21,6 +25,7 @@ export function Signin() {
           label="Email"
           value={values.email}
           data-testid="email-input"
+          onChange={handleChange}
         />
         <InputWithLabel 
           id="password"
@@ -30,6 +35,7 @@ export function Signin() {
           label="Password"
           value={values.password}
           data-testid="password-input"
+          onChange={handleChange}
         />
         <CustomButton data-testid="signin-button" className="button">로그인</CustomButton>
       </form>
