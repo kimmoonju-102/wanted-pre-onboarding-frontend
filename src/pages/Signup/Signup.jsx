@@ -3,14 +3,15 @@ import styled from "styled-components/macro";
 import axios from 'axios';
 import {InputWithLabel} from "@/components/InputWithLabel/InputWithLabel"
 import { CustomButton } from "@/components/Button/CustomButton";
+import { useNavigate } from "react-router-dom";
 
 export function Signup() {
   const [focused, setFocused] = useState(false);
-  const [formValid, setFormValid] = useState(false);
   const [values, setValues] = useState({
     email:"",
     password:"",
   });
+  const navigate = useNavigate();
 
   const inputs = [
     {
@@ -44,6 +45,7 @@ export function Signup() {
       await axios.post('https://www.pre-onboarding-selection-task.shop/auth/signup', { email, password });
       // 회원가입 성공시 필요한 처리
       alert('회원가입이 성공적으로 완료되었습니다!');
+      navigate("/signin");
     } catch (error) {
       // 회원가입 실패시 필요한 처리
       alert(`회원가입에 실패했습니다: ${error.response.data.message}`);
@@ -65,7 +67,7 @@ export function Signup() {
         {inputs.map((input) => (
           <InputWithLabel className="input" key={input.id} {...input} value={values[input.name]} onChange={onChange} onBlur={handleFocus} focused={focused.toString()}/>
         ))}
-        <CustomButton data-testid="signup-button" className="button">회원가입</CustomButton>
+        <CustomButton data-testid="signup-button" className="button" >회원가입</CustomButton>
       </form>
     </StyledSignup>
   )
