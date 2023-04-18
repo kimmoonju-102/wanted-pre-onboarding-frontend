@@ -16,8 +16,9 @@ export function Signup() {
       name:"email",
       type:"email",
       placeholder:"이메일",
-      errorMessage:"유효한 이메일 형식이 아닙니다",
+      errorMessage:"유효한 이메일 형식이 아닙니다.",
       label:"Email",
+      pattern:"^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
       required: true,
     },
     {
@@ -25,9 +26,9 @@ export function Signup() {
       name:"password",
       type:"text",
       placeholder:"비밀번호",
-      errorMessage:"비밀번호는 최소 8자리여야 합니다",
+      errorMessage:"비밀번호는 최소 8자리 이상, 적어도 하나의 영문자, 숫자 및 특수 문자가 있어야 합니다.",
       label:"Password",
-      pattern:`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20)$`,
+      pattern:"^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W).{8,}$",
       required: true,
     },
   ];
@@ -53,7 +54,7 @@ export function Signup() {
         {inputs.map((input) => (
           <InputWithLabel className="input" key={input.id} {...input} value={values[input.name]} onChange={onChange} onBlur={handleFocus} focused={focused.toString()}/>
         ))}
-        <CustomButton className="button" onClick>회원가입</CustomButton>
+        <CustomButton className="button">회원가입</CustomButton>
       </form>
     </StyledSignup>
   )
