@@ -1,15 +1,37 @@
+import { useState } from "react";
 import { CustomButton } from "@/components/Button/CustomButton";
 import { InputWithLabel } from "@/components/InputWithLabel/InputWithLabel";
 import styled from "styled-components/macro";
 
 export function Signin() {
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+
   return (
     <StyledSignin>
       <form className="signin">
         <h1>Singin</h1>
-        <InputWithLabel />
-        <InputWithLabel />
-        <CustomButton className="button">로그인</CustomButton>
+        <InputWithLabel 
+          id="email"
+          name="email"
+          type="email"
+          placeholder="이메일"
+          label="Email"
+          value={values.email}
+          data-testid="email-input"
+        />
+        <InputWithLabel 
+          id="password"
+          name="password"
+          type="password"
+          placeholder="비밀번호"
+          label="Password"
+          value={values.password}
+          data-testid="password-input"
+        />
+        <CustomButton data-testid="signin-button" className="button">로그인</CustomButton>
       </form>
     </StyledSignin>
   );
