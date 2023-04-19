@@ -1,4 +1,5 @@
 import styled from "styled-components/macro";
+import { Link } from "react-router-dom";
 
 export function Home() {
   
@@ -7,18 +8,16 @@ export function Home() {
       <header>
         <h1>Home</h1>
         <ul>
-          <a href="/">
-            <li>홈</li>
-          </a>
-          <a href="/signup">
-            <li>회원가입</li>
-          </a>
-          <a href="/signin">
-            <li>로그인</li>
-          </a>
-          <a href="/todos">
-            <li>할 일 목록</li>
-          </a>
+          <li>
+            <Link to="/">홈</Link>
+          </li>
+          <li>
+            <Link to="/signup">회원가입</Link>
+          </li><li>
+            <Link to="/signin">로그인</Link>
+          </li><li>
+            <Link to="/todos">할 일 목록</Link>
+          </li>
         </ul>
       </header>
       <h2>
