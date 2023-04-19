@@ -42,7 +42,12 @@ export function Signup() {
     e.preventDefault();
     const { email, password } = values;
     try {
-      await axios.post('https://www.pre-onboarding-selection-task.shop/auth/signup', { email, password });
+      await axios.post('https://www.pre-onboarding-selection-task.shop/auth/signup', {
+        email: email,
+        password: password,
+      }, {headers: {
+        "Content-Type": "application/json",
+      }})
       // 회원가입 성공시 필요한 처리
       alert('회원가입이 성공적으로 완료되었습니다!');
       navigate("/signin");
