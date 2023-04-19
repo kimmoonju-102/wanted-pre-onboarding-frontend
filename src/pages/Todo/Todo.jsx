@@ -17,18 +17,15 @@ export function Todo() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  // 입력한 할 일을 추가하는 함수
   const addTask = (task) => {
     setTasks([...tasks, { id: Date.now(), name: task, completed: false }]);
   };
 
 
-  // 선택한 할 일을 삭제하는 함수
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  // 선택한 할 일의 이름을 수정하는 함수
   const editTask = (id, newName) => {
     setTasks(
       tasks.map((task) => {
@@ -40,7 +37,6 @@ export function Todo() {
     );
   };
 
-  // 입력한 할 일을 처리하는 함수
   const handleSubmit = (event) => {
     event.preventDefault();
     const newTaskName = event.target.elements.task.value;
@@ -50,7 +46,6 @@ export function Todo() {
     }
   };
   
-  // 입력한 일 수정하는 함수
   const handleEditTask = (task) => {
     setEditingTaskId(task.id);
     setEditingTaskName(task.name);
