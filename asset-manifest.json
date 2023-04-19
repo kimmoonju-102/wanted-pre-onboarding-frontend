@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/kimmoonju-102/wanted-pre-onboarding-frontend/static/css/main.31d6cfe0.css",
-    "main.js": "/kimmoonju-102/wanted-pre-onboarding-frontend/static/js/main.bc3f324b.js",
-    "index.html": "/kimmoonju-102/wanted-pre-onboarding-frontend/index.html",
-    "main.bc3f324b.js.map": "/kimmoonju-102/wanted-pre-onboarding-frontend/static/js/main.bc3f324b.js.map"
+    "main.css": "/wanted-pre-onboarding-frontend/static/css/main.31d6cfe0.css",
+    "main.js": "/wanted-pre-onboarding-frontend/static/js/main.9fae134b.js",
+    "index.html": "/wanted-pre-onboarding-frontend/index.html",
+    "main.9fae134b.js.map": "/wanted-pre-onboarding-frontend/static/js/main.9fae134b.js.map"
   },
   "entrypoints": [
     "static/css/main.31d6cfe0.css",
-    "static/js/main.bc3f324b.js"
+    "static/js/main.9fae134b.js"
   ]
 }
