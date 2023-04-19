@@ -3,12 +3,14 @@ import axios from "axios";
 import { CustomButton } from "@/components/Button/CustomButton";
 import { InputWithLabel } from "@/components/InputWithLabel/InputWithLabel";
 import styled from "styled-components/macro";
+import { useNavigate } from 'react-router-dom';
 
 export function Signin() {
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -17,14 +19,17 @@ export function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://www.pre-onboarding-selection-task.shop/auth/signin", {
+      const response = await axios.post('https://www.pre-onboarding-selection-task.shop/auth/signin', {
         email: values.email,
         password: values.password,
-      });
-      localStorage.setItem("token", response.data.access_token);
-      console.log("Login successful!");
+      }, {headers: {
+        "Content-Type": "application/json",
+      }})
+      localStorage.setItem("access_token", response.data.access_token);
+      alert("로그인 성공!");
+      navigate('/todos');
     } catch (error) {
-      console.error(error);
+      alert("로그인 실패!")
     }
   };
 
