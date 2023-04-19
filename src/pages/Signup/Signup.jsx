@@ -1,7 +1,9 @@
 import {useState} from "react";
 import styled from "styled-components/macro";
+import axios from 'axios';
 import {InputWithLabel} from "@/components/InputWithLabel/InputWithLabel"
 import { CustomButton } from "@/components/Button/CustomButton";
+import { useNavigate } from "react-router-dom";
 
 export function Signup() {
   const [focused, setFocused] = useState(false);
@@ -9,6 +11,7 @@ export function Signup() {
     email:"",
     password:"",
   });
+  const navigate = useNavigate();
 
   const inputs = [
     {
@@ -16,27 +19,43 @@ export function Signup() {
       name:"email",
       type:"email",
       placeholder:"이메일",
-      errorMessage:"유효한 이메일 형식이 아닙니다",
+      errorMessage:"유효한 이메일 형식이 아닙니다.",
       label:"Email",
+      pattern:"^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
       required: true,
+      "data-testid": "email-input",
     },
     {
       id:2,
       name:"password",
       type:"text",
       placeholder:"비밀번호",
-      errorMessage:"비밀번호는 최소 8자리여야 합니다",
+      errorMessage:"비밀번호는 최소 8자리 이상이여야 합니다.",
       label:"Password",
-      pattern:`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20)$`,
+      pattern:"^[0-9]{8,}$",
       required: true,
+      "data-testid": "password-input",
     },
   ];
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.target)
-    console.log(Object.fromEntries(data.entries()));
-  }
+    const { email, password } = values;
+    try {
+      await axios.post('https://www.pre-onboarding-selection-task.shop/auth/signup', {
+        email: email,
+        password: password,
+      }, {headers: {
+        "Content-Type": "application/json",
+      }})
+      // 회원가입 성공시 필요한 처리
+      alert('회원가입이 성공적으로 완료되었습니다!');
+      navigate("/signin");
+    } catch (error) {
+      // 회원가입 실패시 필요한 처리
+      alert(`회원가입에 실패했습니다: ${error.response.data.message}`);
+    }
+  };
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value});
@@ -53,7 +72,7 @@ export function Signup() {
         {inputs.map((input) => (
           <InputWithLabel className="input" key={input.id} {...input} value={values[input.name]} onChange={onChange} onBlur={handleFocus} focused={focused.toString()}/>
         ))}
-        <CustomButton className="button" onClick>회원가입</CustomButton>
+        <CustomButton data-testid="signup-button" className="button" >회원가입</CustomButton>
       </form>
     </StyledSignup>
   )
