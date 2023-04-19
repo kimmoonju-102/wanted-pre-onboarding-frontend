@@ -105,7 +105,7 @@ export function Todo() {
                   data-testid="modify-input"
                 />
                 <CustomButton data-testid="submit-button" type="submit">
-                  수정
+                  제출
                 </CustomButton>
                 <CustomButton data-testid="cancel-button" onClick={handleCancelEdit}>
                   취소
@@ -119,8 +119,8 @@ export function Todo() {
                   checked={task.completed}
                   onChange={() => handleCheckboxChange(task.id)}
                 />
-                <CustomButton onClick={() => deleteTask(task.id)}>삭제</CustomButton>
-                <CustomButton onClick={() => handleEditTask(task)}>수정</CustomButton>
+                <CustomButton data-testid="modify-button" onClick={() => deleteTask(task.id)}>삭제</CustomButton>
+                <CustomButton data-testid="delete-button" onClick={() => handleEditTask(task)}>수정</CustomButton>
               </>
             )}
           </li>
